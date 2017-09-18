@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion configs.compileSdkVersion
+    buildToolsVersion configs.buildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion configs.minSdkVersion
+        targetSdkVersion configs.targetSdkVersion
+        versionCode configs.versionCode
+        versionName configs.versionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libs.appcompatV7
+}
