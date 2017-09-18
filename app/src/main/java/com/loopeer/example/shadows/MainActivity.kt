@@ -15,4 +15,8 @@ class MainActivity : AppCompatActivity() {
     fun onCardItemClick(view: View) {
         startActivity(Intent(this, CardViewActivity::class.java))
     }
+
+    fun onShadowItemClick(view: View) {
+        startActivity(Intent(this, ShadowViewActivity::class.java))
+    }
 }
