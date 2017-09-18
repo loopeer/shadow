@@ -12,8 +12,8 @@ uploadArchives {
     }
 }
 
-def siteUrl = 'https://bitbucket.org/loopeer/laputapp'
-def gitUrl = 'https://bitbucket.org/loopeer/laputapp.git'
+def siteUrl = 'https://github.com/loopeer/shadow'
+def gitUrl = 'https://github.com/loopeer/shadow.git'
 group = "com.loopeer.lib"
 
 install {
