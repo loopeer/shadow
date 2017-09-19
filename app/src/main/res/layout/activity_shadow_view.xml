@@ -14,12 +14,26 @@
         android:id="@+id/shadow_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:foreground="?selectableItemBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="onShadowClickTest"
+        app:layout_constraintTop_toBottomOf="@+id/space">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Google Developer Days Europe 2017 took place in Krakow, Poland. In this playlist, you can find all the recorded sessions from the event, across all tracks (Develop on Mobile, Mobile Web, Beyond Mobile, and Android)."/>
+    </com.loopeer.shadow.ShadowView>
+
+    <com.loopeer.shadow.ShadowView
+        android:id="@+id/shadow_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space">
+        app:layout_constraintTop_toBottomOf="@+id/shadow_view">
 
         <TextView
             android:layout_width="match_parent"
@@ -35,18 +49,20 @@
         android:layout_marginStart="8dp"
         android:max="100"
         android:progress="8"
-        app:layout_constraintBottom_toBottomOf="@+id/text_padding"
+        app:layout_constraintBottom_toBottomOf="@+id/text_padding_show"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_padding"
-        app:layout_constraintTop_toTopOf="@+id/text_padding"/>
+        app:layout_constraintStart_toEndOf="@+id/text_padding_show"
+        app:layout_constraintTop_toTopOf="@+id/text_padding_show"/>
 
     <TextView
         android:id="@+id/text_padding"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Padding"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/text_margin"
@@ -66,17 +82,18 @@
         android:layout_marginStart="8dp"
         android:max="100"
         android:progress="8"
-        app:layout_constraintBottom_toBottomOf="@+id/text_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/text_margin_show"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_margin"
-        app:layout_constraintTop_toTopOf="@+id/text_margin"/>
+        app:layout_constraintStart_toEndOf="@+id/text_margin_show"
+        app:layout_constraintTop_toTopOf="@+id/text_margin_show"/>
 
     <Space
         android:id="@+id/space"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/text_shadow_radius"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_offset"
+        tools:layout_editor_absoluteX="0dp"/>
 
     <TextView
         android:id="@+id/text_shadow_radius"
@@ -84,9 +101,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="ShadowRadius"
+        android:text="Radius"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seek_margin"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_margin"/>
 
     <SeekBar
         android:id="@+id/seek_shadow_radius"
@@ -98,6 +115,75 @@
         android:progress="4"
         app:layout_constraintBottom_toBottomOf="@+id/text_shadow_radius"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_shadow_radius"/>
+        app:layout_constraintStart_toEndOf="@+id/text_radius_show"
+        app:layout_constraintTop_toTopOf="@+id/text_shadow_radius"/>
+
+    <TextView
+        android:id="@+id/text_padding_show"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="8"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/text_margin"
+        app:layout_constraintStart_toEndOf="@+id/text_padding"
+        app:layout_constraintTop_toTopOf="@+id/text_padding"/>
+
+    <TextView
+        android:id="@+id/text_margin_show"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="8"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/text_margin"
+        app:layout_constraintStart_toEndOf="@+id/text_margin"
+        app:layout_constraintTop_toTopOf="@+id/text_margin"/>
+
+    <TextView
+        android:id="@+id/text_radius_show"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="4"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/text_shadow_radius"
+        app:layout_constraintStart_toEndOf="@+id/text_shadow_radius"
+        app:layout_constraintTop_toTopOf="@+id/text_shadow_radius"/>
+
+    <TextView
+        android:id="@+id/text_offset"
+        android:layout_width="60dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Offset"
+        app:layout_constraintStart_toStartOf="@+id/space"
+        app:layout_constraintTop_toBottomOf="@+id/text_shadow_radius"/>
+
+    <TextView
+        android:id="@+id/text_offset_show"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="10"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/text_offset"
+        app:layout_constraintStart_toEndOf="@+id/text_offset"
+        app:layout_constraintTop_toTopOf="@+id/text_offset"/>
+
+    <SeekBar
+        android:id="@+id/seek_offset"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:max="100"
+        android:progress="10"
+        app:layout_constraintBottom_toBottomOf="@+id/text_offset_show"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_offset_show"
+        app:layout_constraintTop_toTopOf="@+id/text_offset_show"/>
 
 </android.support.constraint.ConstraintLayout>

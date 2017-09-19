@@ -14,7 +14,12 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
 
     private val bgPaint = Paint()
     var shadowColor : Int = 0
-    var shadowRadius = 4f
+    var offset = 10
+    set(value) {
+        field = value
+        invalidate()
+    }
+    var shadowRadius = 7f
         set(value) {
             field = value
             bgPaint.setShadowLayer(value, 0f, 0f,
@@ -27,7 +32,7 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
         bgPaint.color = Color.WHITE
         bgPaint.isAntiAlias = true
         bgPaint.style = Paint.Style.FILL
-        bgPaint.setShadowLayer(shadowRadius, 0f, 0f,
+        bgPaint.setShadowLayer(shadowRadius, 0f, 1f,
                 shadowColor)
         setLayerType(LAYER_TYPE_SOFTWARE, bgPaint)
         setWillNotDraw(false)
@@ -37,7 +42,6 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
         super.onDraw(canvas)
 
         canvas?.let {
-            val offset = 20
             val r = 4f
             val w = measuredWidth
             val h = measuredHeight
