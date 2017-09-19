@@ -25,10 +25,6 @@ class ShadowViewActivity : AppCompatActivity() {
             shadow_view.requestLayout()
             text_margin_show.text = p.toString()
         })
-        seek_offset.onProgressChange { _, p, _ ->
-            shadow_view.offset = p
-            text_offset_show.text = p.toString()
-        }
 
     }
 

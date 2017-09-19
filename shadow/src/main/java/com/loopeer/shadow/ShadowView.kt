@@ -11,20 +11,17 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
 
     private val bgPaint = Paint()
     var shadowColor: Int = 0
-    var offset = 10
-        set(value) {
-            field = value
-            invalidate()
-        }
+    var offset = 7
 
     var shadowRadius = 7f
         set(value) {
             field = value
             bgPaint.setShadowLayer(value, 0f, 0f,
                     shadowColor)
+            offset = value.toInt()
             invalidate()
         }
-    var radius = 0f
+    var radius = 20f
 
     init {
         shadowColor = Color.parseColor("#FAC4BA")//FAC4BA E3E5E7
@@ -37,16 +34,21 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
         setWillNotDraw(false)
     }
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+
+    }
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
         canvas?.let {
-            val r = 20f
             val w = measuredWidth
             val h = measuredHeight
             val rect = Rect(offset, offset, w - offset, h - offset)
             val rectF = RectF(rect)
-            it.drawRoundRect(rectF, r, r, bgPaint)
+            it.drawRoundRect(rectF, radius, radius, bgPaint)
         }
     }
 
@@ -57,7 +59,7 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
             val w = measuredWidth
             val h = measuredHeight
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                path.addRoundRect(offset.toFloat(), offset.toFloat(), (w - offset).toFloat(), (h - offset).toFloat(), 20f, 20f, Path.Direction.CW)
+                path.addRoundRect(offset.toFloat(), offset.toFloat(), (w - offset).toFloat(), (h - offset).toFloat(), radius, radius, Path.Direction.CW)
                 canvas.clipPath(path)
             }
             super.onDrawForeground(canvas)
