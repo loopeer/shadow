@@ -4,6 +4,15 @@
     <declare-styleable name="ShadowView">
         <attr name="android:foreground"/>
         <attr name="shadowMargin" format="dimension"/>
+        <attr name="shadowMarginTop" format="dimension"/>
+        <attr name="shadowMarginLeft" format="dimension"/>
+        <attr name="shadowMarginRight" format="dimension"/>
+        <attr name="shadowMarginBottom" format="dimension"/>
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="cornerRadiusTL" format="dimension"/>
+        <attr name="cornerRadiusTR" format="dimension"/>
+        <attr name="cornerRadiusBL" format="dimension"/>
+        <attr name="cornerRadiusBR" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="ShadowView_Layout">
         <attr name="layout_gravity" />

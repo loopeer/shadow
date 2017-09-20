@@ -42,18 +42,93 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
             offset = value.toInt()
             invalidate()
         }
-    var radius = 20f
+    var cornerRadius = 20f
+    var cornerRadiusTL: Float
+        get() {
+            return if (cornerRadius > 0) {
+                cornerRadius
+            } else {
+                field
+            }
+        }
+    var cornerRadiusTR: Float
+        get() {
+            return if (cornerRadius > 0) {
+                cornerRadius
+            } else {
+                field
+            }
+        }
+    var cornerRadiusBL: Float
+        get() {
+            return if (cornerRadius > 0) {
+                cornerRadius
+            } else {
+                field
+            }
+        }
+    var cornerRadiusBR: Float
+        get() {
+            return if (cornerRadius > 0) {
+                cornerRadius
+            } else {
+                field
+            }
+        }
+
     var shadowMargin: Int
+    var shadowMarginTop: Int
+        get() {
+            return if (shadowMargin > 0) {
+                shadowMargin
+            } else {
+                field
+            }
+        }
+    var shadowMarginLeft: Int = 0
+        get() {
+            return if (shadowMargin > 0) {
+                shadowMargin
+            } else {
+                field
+            }
+        }
+    var shadowMarginRight: Int = 0
+        get() {
+            return if (shadowMargin > 0) {
+                shadowMargin
+            } else {
+                field
+            }
+        }
+    var shadowMarginBottom: Int = 0
+        get() {
+            return if (shadowMargin > 0) {
+                shadowMargin
+            } else {
+                field
+            }
+        }
 
     init {
         val a = getContext().obtainStyledAttributes(attributeSet, R.styleable.ShadowView,
                 defStyleInt, 0)
         val d = a.getDrawable(R.styleable.ShadowView_android_foreground)
         if (d != null) {
-            setForeground(foregroundDraw)
+            setForeground(d)
         }
-        shadowMargin = a.getDimensionPixelSize(
-                R.styleable.ShadowView_shadowMargin, SIZE_UNSET)
+        shadowMargin = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMargin, SIZE_UNSET)
+        shadowMarginTop = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginTop, shadowMargin)
+        shadowMarginLeft = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginLeft, shadowMargin)
+        shadowMarginRight = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginRight, shadowMargin)
+        shadowMarginBottom = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginBottom, shadowMargin)
+        cornerRadius = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadius, SIZE_UNSET).toFloat()
+        val cornerValues = cornerRadius.toInt()
+        cornerRadiusTL = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusTL, cornerValues).toFloat()
+        cornerRadiusTR = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusTR, cornerValues).toFloat()
+        cornerRadiusBL = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusBL, cornerValues).toFloat()
+        cornerRadiusBR = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusBR, cornerValues).toFloat()
+
         a.recycle()
         foregroundColor = Color.parseColor("#1f000000")//dark #33ffffff light 1f000000
 
@@ -77,12 +152,12 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
         val shadowMeasureHeightMatchParent = layoutParams.height == ViewGroup.LayoutParams.MATCH_PARENT
         var widthSpec = widthMeasureSpec
         if (shadowMeasureWidthMatchParent) {
-            val childWidthSize = measuredWidth - getShadowMarginRight() - getShadowMarginLeft()
+            val childWidthSize = measuredWidth - shadowMarginRight - shadowMarginLeft
             widthSpec = MeasureSpec.makeMeasureSpec(childWidthSize, MeasureSpec.EXACTLY)
         }
         var heightSpec = heightMeasureSpec
         if (shadowMeasureHeightMatchParent) {
-            val childHeightSize = measuredHeight - getShadowMarginTop() - getShadowMarginBottom()
+            val childHeightSize = measuredHeight - shadowMarginTop - shadowMarginBottom
             heightSpec = MeasureSpec.makeMeasureSpec(childHeightSize, MeasureSpec.EXACTLY)
         }
         val child = getChildAt(0)
@@ -95,14 +170,14 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
                                 child.measuredWidth + lp.leftMargin + lp.rightMargin)
                     else
                         Math.max(maxWidth,
-                                child.measuredWidth + getShadowMarginLeft() + getShadowMarginRight() + lp.leftMargin + lp.rightMargin)
+                                child.measuredWidth + shadowMarginLeft + shadowMarginRight + lp.leftMargin + lp.rightMargin)
             maxHeight =
                     if (shadowMeasureHeightMatchParent)
                         Math.max(maxHeight,
-                                child.measuredHeight + getShadowMarginTop() + getShadowMarginBottom() + lp.topMargin + lp.bottomMargin)
+                                child.measuredHeight + lp.topMargin + lp.bottomMargin)
                     else
                         Math.max(maxHeight,
-                                child.measuredHeight + getShadowMarginTop() + getShadowMarginBottom() + lp.topMargin + lp.bottomMargin)
+                                child.measuredHeight + shadowMarginTop + shadowMarginBottom + lp.topMargin + lp.bottomMargin)
 
             childState = View.combineMeasuredStates(childState, child.measuredState)
         }
@@ -159,24 +234,24 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
 
                 when (absoluteGravity and Gravity.HORIZONTAL_GRAVITY_MASK) {
                     Gravity.CENTER_HORIZONTAL -> childLeft = parentLeft + (parentRight - parentLeft - width) / 2 +
-                            lp.leftMargin - lp.rightMargin + getShadowMarginLeft() - getShadowMarginRight()
+                            lp.leftMargin - lp.rightMargin + shadowMarginLeft - shadowMarginRight
                     Gravity.RIGHT -> {
                         if (!forceLeftGravity) {
-                            childLeft = parentRight - width - lp.rightMargin - getShadowMarginRight()
+                            childLeft = parentRight - width - lp.rightMargin - shadowMarginRight
                         }
                     }
                     Gravity.LEFT -> {
-                        childLeft = parentLeft + lp.leftMargin + getShadowMarginLeft()
+                        childLeft = parentLeft + lp.leftMargin + shadowMarginLeft
                     }
-                    else -> childLeft = parentLeft + lp.leftMargin + getShadowMarginLeft()
+                    else -> childLeft = parentLeft + lp.leftMargin + shadowMarginLeft
                 }
 
                 when (verticalGravity) {
-                    Gravity.TOP -> childTop = parentTop + lp.topMargin + getShadowMarginTop()
+                    Gravity.TOP -> childTop = parentTop + lp.topMargin + shadowMarginTop
                     Gravity.CENTER_VERTICAL -> childTop = parentTop + (parentBottom - parentTop - height) / 2 +
-                            lp.topMargin - lp.bottomMargin + getShadowMarginTop() - getShadowMarginBottom()
-                    Gravity.BOTTOM -> childTop = parentBottom - height - lp.bottomMargin - getShadowMarginBottom()
-                    else -> childTop = parentTop + lp.topMargin + getShadowMarginTop()
+                            lp.topMargin - lp.bottomMargin + shadowMarginTop - shadowMarginBottom
+                    Gravity.BOTTOM -> childTop = parentBottom - height - lp.bottomMargin - shadowMarginBottom
+                    else -> childTop = parentTop + lp.topMargin + shadowMarginTop
                 }
 
                 child.layout(childLeft, childTop, childLeft + width, childTop + height)
@@ -190,9 +265,13 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
         canvas?.let {
             val w = measuredWidth
             val h = measuredHeight
-            val rect = Rect(shadowMargin, shadowMargin, w - shadowMargin, h - shadowMargin)
-            val rectF = RectF(rect)
-            it.drawRoundRect(rectF, radius, radius, bgPaint)
+            val path = ShapeUtils.roundedRect(shadowMarginLeft.toFloat(), shadowMarginTop.toFloat(), (w - shadowMarginRight).toFloat()
+                    , (h - shadowMarginBottom).toFloat(), getCornerRadiusValue(), getCornerRadiusValue()
+                    , cornerRadiusTL > 0
+                    , cornerRadiusTR > 0
+                    , cornerRadiusBR > 0
+                    , cornerRadiusBL > 0)
+            it.drawPath(path, bgPaint)
         }
     }
 
@@ -203,13 +282,19 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
             canvas.save()
             val w = measuredWidth
             val h = measuredHeight
-            val path = ShapeUtils.roundedRect(shadowMargin.toFloat(), shadowMargin.toFloat(), (w - shadowMargin).toFloat()
-                    , (h - shadowMargin).toFloat(), radius, radius)
+            val path = ShapeUtils.roundedRect(shadowMarginLeft.toFloat(), shadowMarginTop.toFloat(), (w - shadowMarginRight).toFloat()
+                    , (h - shadowMarginBottom).toFloat(), getCornerRadiusValue(), getCornerRadiusValue()
+                    , cornerRadiusTL > 0
+                    , cornerRadiusTR > 0
+                    , cornerRadiusBR > 0
+                    , cornerRadiusBL > 0)
             canvas.clipPath(path)
             drawForeground(canvas)
             canvas.restore()
         }
     }
+
+    fun getCornerRadiusValue() = floatArrayOf(cornerRadius, cornerRadiusTL, cornerRadiusTR, cornerRadiusBR, cornerRadiusBL).max()?:0f
 
     fun drawForeground(canvas: Canvas?) {
         foregroundDraw?.let {
@@ -355,36 +440,8 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
         return paddingBottom
     }
 
-    private fun getShadowMarginLeft(): Int {
-        return shadowMargin
-    }
-
-    private fun getShadowMarginTop(): Int {
-        return shadowMargin
-    }
-
-    private fun getShadowMarginRight(): Int {
-        return shadowMargin
-    }
-
-    private fun getShadowMarginBottom(): Int {
-        return shadowMargin
-    }
-
     class LayoutParams : ViewGroup.MarginLayoutParams {
 
-        /**
-         * The gravity to apply with the View to which these layout parameters
-         * are associated.
-         *
-         *
-         * The default value is [.UNSPECIFIED_GRAVITY], which is treated
-         * by FrameLayout as `Gravity.TOP | Gravity.START`.
-         *
-         * @see android.view.Gravity
-         *
-         * @attr ref android.R.styleable#FrameLayout_Layout_layout_gravity
-         */
         var gravity = UNSPECIFIED_GRAVITY
 
         constructor(c: Context, attrs: AttributeSet?) : super(c, attrs) {

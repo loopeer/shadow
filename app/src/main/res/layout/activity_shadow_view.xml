@@ -19,22 +19,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/space"
-        app:shadowMargin="16dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Google Developer Days Europe 2017 took place in Krakow, Poland. In this playlist, you can find all the recorded sessions from the event, across all tracks (Develop on Mobile, Mobile Web, Beyond Mobile, and Android)."/>
-    </com.loopeer.shadow.ShadowView>
-
-    <com.loopeer.shadow.ShadowView
-        android:id="@+id/shadow_view1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shadow_view">
+        app:shadowMarginTop="16dp"
+        app:shadowMarginRight="16dp"
+        app:shadowMarginLeft="16dp"
+        app:cornerRadiusTL="8dp"
+        app:cornerRadiusTR="8dp">
 
         <TextView
             android:layout_width="match_parent"
