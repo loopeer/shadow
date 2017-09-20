@@ -3,5 +3,9 @@
 
     <declare-styleable name="ShadowView">
         <attr name="android:foreground"/>
+        <attr name="shadowMargin" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="ShadowView_Layout">
+        <attr name="layout_gravity" />
     </declare-styleable>
 </resources>
