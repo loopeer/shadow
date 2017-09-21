@@ -4,11 +4,9 @@
 
 Screenshot
 ====
-![](/screenshot/bottom_radius.jpg)
-![](/screenshot/change_shadow_color.jpg)
-![](/screenshot/shadow_foreground_change.gif)
-![](/screenshot/with_no_top_shadow.jpg)
-
+![](/screenshot/shadow_radius.gif)![](/screenshot/shadow_foreground.gif)
+![](/screenshot/shadow_corners.gif)![](/screenshot/shadow_color.gif)
+![](/screenshot/shadow_margin_hide.gif)
 Installation
 ====
 ```groovy
