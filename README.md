@@ -26,25 +26,24 @@ dependencies {
 Usages
 ====
 ```xml
+<com.loopeer.shadow.ShadowView
+    android:id="@+id/shadow_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:elevation="10dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:onClick="onShadowClickTest"
+    android:padding="10dp"
+    app:cornerRadius="4dp"
+    app:shadowMargin="20dp"
+    app:shadowRadius="14dp">
 
-    <com.loopeer.shadow.ShadowView
-        android:id="@+id/shadow_view"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:elevation="10dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:onClick="onShadowClickTest"
-        android:padding="10dp"
-        app:cornerRadius="4dp"
-        app:shadowMargin="20dp"
-        app:shadowRadius="14dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Google Developer Days Europe 2017 took place in Krakow, Poland. In this playlist, you can find all the recorded sessions from the event, across all tracks (Develop on Mobile, Mobile Web, Beyond Mobile, and Android)."/>
-    </com.loopeer.shadow.ShadowView>
+        android:text="Google Developer Days Europe 2017 took place in Krakow, Poland. In this playlist, you can find all the recorded sessions from the event, across all tracks (Develop on Mobile, Mobile Web, Beyond Mobile, and Android)."/>
+</com.loopeer.shadow.ShadowView>
 ```
 
 Attribute
