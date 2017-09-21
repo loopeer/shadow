@@ -43,12 +43,14 @@ ext {
 
     supportLibraryVersion = '26.1.0'
     constraintVersion = '1.1.0-beta1'
+    flexboxVersion = '0.3.0'
 
     libs = [appcompatV7     : "com.android.support:appcompat-v7:$supportLibraryVersion",
             supportV4       : "com.android.support:support-v4:$supportLibraryVersion",
             recyclerView    : "com.android.support:recyclerview-v7:$supportLibraryVersion",
             cardview        : "com.android.support:cardview-v7:$supportLibraryVersion",
             design          : "com.android.support:design:$supportLibraryVersion",
-            constraintLayout: "com.android.support.constraint:constraint-layout:$constraintVersion"
+            constraintLayout: "com.android.support.constraint:constraint-layout:$constraintVersion",
+            flexbox         : "com.google.android:flexbox:$flexboxVersion"
     ]
 }

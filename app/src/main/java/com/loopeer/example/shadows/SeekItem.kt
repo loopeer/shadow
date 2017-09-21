@@ -14,7 +14,9 @@ enum class SeekItem {
     CORNER_RADIUS_TOP_LEFT("Corner Radius Top Left"),
     CORNER_RADIUS_TOP_RIGHT("Corner Radius Top Right"),
     CORNER_RADIUS_BOTTOM_RIGHT("Corner Radius Bottom Right"),
-    CORNER_RADIUS_BOTTOM_LEFT("Corner Radius Bottom Left"),;
+    CORNER_RADIUS_BOTTOM_LEFT("Corner Radius Bottom Left"),
+    FOREGROUND_COLOR("Foreground Color"),
+    SHADOW_COLOR("Shadow Color"),;
 
     var title: String
 

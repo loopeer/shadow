@@ -28,6 +28,10 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
 
     private val bgPaint = Paint()
     var shadowColor: Int = 0
+        set(value) {
+            field = value
+            updatePaintShadow(shadowRadius, shadowDx, shadowDy, value)
+        }
     var foregroundColor: Int = 0
         set(value) {
             field = value
@@ -41,9 +45,7 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
                 v = getShadowMarginMax()
             }
             field = value
-            bgPaint.setShadowLayer(v, 0f, 0f,
-                    shadowColor)
-            invalidate()
+            updatePaintShadow(v, shadowDx, shadowDy, shadowColor)
         }
         get() {
             return if (field > getShadowMarginMax() && getShadowMarginMax() != 0f) {
@@ -52,6 +54,8 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
                 field
             }
         }
+    var shadowDx = 0f
+    var shadowDy = 0f
     var cornerRadiusTL: Float
     var cornerRadiusTR: Float
     var cornerRadiusBL: Float
@@ -81,7 +85,10 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
         val a = getContext().obtainStyledAttributes(attributeSet, R.styleable.ShadowView,
                 defStyleInt, 0)
         shadowColor = a.getColor(R.styleable.ShadowView_shadowColor, Color.parseColor("#E3E5E7"))
-        foregroundColor = a.getColor(R.styleable.ShadowView_foregroundColor, Color.parseColor("#1f000000"))//dark #33ffffff light 1f000000
+        /** dark #33ffffff light 1f000000 */
+        foregroundColor = a.getColor(R.styleable.ShadowView_foregroundColor, Color.parseColor("#1f000000"))
+        shadowDx = a.getFloat(R.styleable.ShadowView_shadowDx, 0f)
+        shadowDy = a.getFloat(R.styleable.ShadowView_shadowDy, 0f)
         val d = a.getDrawable(R.styleable.ShadowView_android_foreground)
         if (d != null) {
             setForeground(d)
@@ -123,8 +130,12 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
     }
 
     private fun updatePaintShadow() {
-        bgPaint.setShadowLayer(shadowRadius, 0f, 0f,
-                shadowColor)
+        updatePaintShadow(shadowRadius, shadowDx, shadowDy, shadowColor)
+    }
+
+    private fun updatePaintShadow(radius: Float, dx: Float, dy: Float, color: Int) {
+        bgPaint.setShadowLayer(radius, dx, dy,
+                color)
         invalidate()
     }
 
@@ -437,30 +448,15 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
     }
 
     class LayoutParams : ViewGroup.MarginLayoutParams {
-
         var gravity = UNSPECIFIED_GRAVITY
 
         constructor(c: Context, attrs: AttributeSet?) : super(c, attrs) {
-
             val a = c.obtainStyledAttributes(attrs, R.styleable.ShadowView_Layout)
             gravity = a.getInt(R.styleable.ShadowView_Layout_layout_gravity, UNSPECIFIED_GRAVITY)
             a.recycle()
         }
 
-        constructor(width: Int, height: Int) : super(width, height) {}
-
-        constructor(width: Int, height: Int, gravity: Int) : super(width, height) {
-            this.gravity = gravity
-        }
-
-        constructor(source: ViewGroup.LayoutParams) : super(source) {}
-
-        constructor(source: ViewGroup.MarginLayoutParams) : super(source) {}
-
-        constructor(source: LayoutParams) : super(source) {
-
-            this.gravity = source.gravity
-        }
+        constructor(source: ViewGroup.LayoutParams) : super(source)
 
         companion object {
             val UNSPECIFIED_GRAVITY = -1
