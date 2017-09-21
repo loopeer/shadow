@@ -8,7 +8,7 @@ Screenshot
 |H|H|H|
 |---|---|---|
 |Change Radius|Change foreground|Change Corners|
-|![](/screenshot/shadow_radius.gif)|![](/screenshot/shadow_foreground.gif)|![](/screenshot/shadow_corners.gif)![]|
+|![](/screenshot/shadow_radius.gif)|![](/screenshot/shadow_foreground.gif)|![](/screenshot/shadow_corners.gif)|
 |Change shadow color|change shadow margin||
 |![](/screenshot/shadow_color.gif)|![](/screenshot/shadow_margin_hide.gif)||
 
