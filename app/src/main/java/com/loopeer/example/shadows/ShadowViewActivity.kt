@@ -1,6 +1,5 @@
 package com.loopeer.example.shadows
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
@@ -56,6 +55,7 @@ class ShadowViewActivity : AppCompatActivity() {
         override fun getItemViewType(position: Int): Int {
             return when (SeekItem.values()[position]) {
                 SeekItem.FOREGROUND_COLOR,
+                SeekItem.BACKGROUND_COLOR,
                 SeekItem.SHADOW_COLOR -> {
                     R.layout.list_item_color_select
                 }
@@ -165,48 +165,76 @@ class ShadowViewActivity : AppCompatActivity() {
                         shadowView.invalidate()
                     })
                 }
+                SeekItem.SHADOW_DX -> {
+                    itemView.text_value.text = shadowView.shadowDx.toString()
+                    itemView.seek_bar.onProgressChange({ _, p, _ ->
+                        shadowView.shadowDx = p.toFloat()
+                        itemView.text_value.text = p.toString()
+                        shadowView.invalidate()
+                    })
+                }
+                SeekItem.SHADOW_DY -> {
+                    itemView.text_value.text = shadowView.shadowDy.toString()
+                    itemView.seek_bar.onProgressChange({ _, p, _ ->
+                        shadowView.shadowDy = p.toFloat()
+                        itemView.text_value.text = p.toString()
+                        shadowView.invalidate()
+                    })
+                }
             }
         }
     }
     class ShadowViewColorItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         var onClickColor: (() -> Unit)? = null
 
         fun bind(seekItem: SeekItem, shadowView: ShadowView) {
             itemView.text_color_title.text = seekItem.title
             val inflater = LayoutInflater.from(itemView.context)
-            for (item in ColorEnum.values()) {
-                var view: View? = null
-                if (itemView.view_flex.childCount != ColorEnum.values().size) {
-                    view = inflater.inflate(R.layout.view_item_color, itemView.view_flex, false)
-                    val p = FlexboxLayout.LayoutParams(dp2px(42f, itemView.context), dp2px(24f, itemView.context))
-                    val margin = dp2px(4f, itemView.context)
-                    p.setMargins(margin, margin, margin, margin)
-                    itemView.view_flex.addView(view, p)
-                } else {
-                    view = itemView.view_flex.getChildAt(item.ordinal)
+            itemView.view_flex.removeAllViews()
+            when (seekItem) {
+                SeekItem.SHADOW_COLOR -> {
+                    for (item in ShadowColorEnum.values()) {
+                        var view: View = createView(inflater, item.ordinal)
+                        view.setBackgroundColor(Color.parseColor(item.color))
+                        view.isSelected = Color.parseColor(item.color) == shadowView.shadowColor
+                        view.setOnClickListener {
+                            shadowView.shadowColor = Color.parseColor(item.color)
+                            onClickColor?.invoke()
+                        }
+                    }
                 }
-                view?.let {
-                    it.setBackgroundColor(Color.parseColor(item.color))
-                    when (seekItem) {
-                        SeekItem.SHADOW_COLOR -> {
-                            it.isSelected = Color.parseColor(item.color) == shadowView.shadowColor
-                            it.setOnClickListener {
-                                shadowView.shadowColor = Color.parseColor(item.color)
-                                onClickColor?.invoke()
-                            }
+                SeekItem.FOREGROUND_COLOR -> {
+                    for (itemf in ForegroundColorEnum.values()) {
+                        var view: View = createView(inflater, itemf.ordinal)
+                        view.setBackgroundColor(Color.parseColor(itemf.color))
+                        view.isSelected = Color.parseColor(itemf.color) == shadowView.foregroundColor
+                        view.setOnClickListener {
+                            shadowView.foregroundColor = Color.parseColor(itemf.color)
+                            onClickColor?.invoke()
                         }
-                        SeekItem.FOREGROUND_COLOR -> {
-                            it.isSelected = Color.parseColor(item.color) == shadowView.foregroundColor
-                            it.setOnClickListener {
-                                shadowView.foregroundColor = Color.parseColor(item.color)
-                                onClickColor?.invoke()
-                            }
+                    }
+                }
+                SeekItem.BACKGROUND_COLOR -> {
+                    for (itemb in BackgroundColorEnum.values()) {
+                        var view: View = createView(inflater, itemb.ordinal)
+                        view.setBackgroundColor(Color.parseColor(itemb.color))
+                        view.isSelected = Color.parseColor(itemb.color) == shadowView.backgroundClr
+                        view.setOnClickListener {
+                            shadowView.backgroundClr = Color.parseColor(itemb.color)
+                            onClickColor?.invoke()
                         }
-
                     }
                 }
             }
+        }
+
+        private fun createView(inflater: LayoutInflater, position: Int): View {
+            var view: View = inflater.inflate(R.layout.view_item_color, itemView.view_flex, false)
+            val p = FlexboxLayout.LayoutParams(dp2px(42f, itemView.context), dp2px(24f, itemView.context))
+            val margin = dp2px(4f, itemView.context)
+            p.setMargins(margin, margin, margin, margin)
+            itemView.view_flex.addView(view, p)
+            return view
         }
 
         fun dp2px(dipValue: Float, context: Context): Int {

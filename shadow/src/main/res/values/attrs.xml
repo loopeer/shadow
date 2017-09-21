@@ -17,6 +17,8 @@
         <attr name="shadowColor" format="color"/>
         <attr name="shadowDx" format="float"/>
         <attr name="shadowDy" format="float"/>
+        <attr name="shadowRadius" format="dimension"/>
+        <attr name="backgroundColor" format="color"/>
     </declare-styleable>
     <declare-styleable name="ShadowView_Layout">
         <attr name="layout_gravity" />
