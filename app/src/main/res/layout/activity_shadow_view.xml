@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:background="#F5F5F5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     android:orientation="vertical"
     tools:context="com.loopeer.example.shadows.ShadowViewActivity">
 
@@ -23,23 +23,23 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/view_recycler"
             android:layout_width="match_parent"
-            android:paddingBottom="16dp"
+            android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:layout_height="wrap_content"/>
+            android:paddingBottom="16dp"/>
     </FrameLayout>
 
     <com.loopeer.shadow.ShadowView
         android:id="@+id/shadow_view"
-        android:elevation="10dp"
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        app:shadowMargin="20dp"
-        app:shadowRadius="14dp"
-        app:cornerRadius="4dp"
+        android:elevation="10dp"
         android:foreground="?attr/selectableItemBackground"
-        android:onClick="onShadowClickTest">
+        android:onClick="onShadowClickTest"
+        android:padding="10dp"
+        app:cornerRadius="4dp"
+        app:shadowMargin="20dp"
+        app:shadowRadius="14dp">
 
         <TextView
             android:layout_width="match_parent"

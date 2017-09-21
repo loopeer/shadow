@@ -1,6 +1,11 @@
 # shadow
 
-[Download Smaple]()
+This library draw android view shadow by ShadowLayer. You may don't like the CardView's black shadow which we can't change it's color.   
+Same to CardView wrap content and set shadow radius. You can change shadow color, foreground color and corner radius everywhere.
+Because the shadow is draw in the view. So you must add space to draw the shadow. The ShadowView add one param shadowMargin which must be set before you add shadow radius to the view.  
+Warn: Margin In UI = layout_margin + shadow_margin(Add by ShadowView)
+  
+[Download Smaple](https://github.com/loopeer/shadow/releases/download/v0.0.1/app-debug.apk)
 
 Screenshot
 ====
@@ -26,16 +31,16 @@ Usages
 
     <com.loopeer.shadow.ShadowView
         android:id="@+id/shadow_view"
-        android:elevation="10dp"
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        app:shadowMargin="20dp"
-        app:shadowRadius="14dp"
-        app:cornerRadius="4dp"
+        android:elevation="10dp"
         android:foreground="?attr/selectableItemBackground"
-        android:onClick="onShadowClickTest">
+        android:onClick="onShadowClickTest"
+        android:padding="10dp"
+        app:cornerRadius="4dp"
+        app:shadowMargin="20dp"
+        app:shadowRadius="14dp">
 
         <TextView
             android:layout_width="match_parent"
