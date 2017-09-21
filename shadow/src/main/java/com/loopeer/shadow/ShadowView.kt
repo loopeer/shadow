@@ -8,6 +8,7 @@ import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.os.Build
+import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -98,9 +99,10 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
     init {
         val a = getContext().obtainStyledAttributes(attributeSet, R.styleable.ShadowView,
                 defStyleInt, 0)
-        shadowColor = a.getColor(R.styleable.ShadowView_shadowColor, Color.parseColor("#DCDDE0"))
-        /** dark #33ffffff light 1f000000 */
-        foregroundColor = a.getColor(R.styleable.ShadowView_foregroundColor, Color.parseColor("#1f000000"))
+        shadowColor = a.getColor(R.styleable.ShadowView_shadowColor
+                , ContextCompat.getColor(context, R.color.shadow_view_default_shadow_color))
+        foregroundColor = a.getColor(R.styleable.ShadowView_foregroundColor
+                , ContextCompat.getColor(context, R.color.shadow_view_foreground_color_dark))
         backgroundClr = a.getColor(R.styleable.ShadowView_backgroundColor, Color.WHITE)
         shadowDx = a.getFloat(R.styleable.ShadowView_shadowDx, 0f)
         shadowDy = a.getFloat(R.styleable.ShadowView_shadowDy, 0f)

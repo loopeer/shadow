@@ -7,8 +7,8 @@ enum class ForegroundColorEnum {
     YELLOW("#ffeb3b"),
     DEEP_ORANGE("#ff5722"),
     BLUE_GREY("#607d8b"),
-    DEFAULT_LIGHT("#1f000000"),
-    DEFAULT_DARK("#33ffffff"),;
+    DEFAULT_DARK("#1f000000"),
+    DEFAULT_LIGHT("#33ffffff"),;
 
     var color: String
 

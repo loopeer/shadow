@@ -1,127 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
-    android:orientation="vertical"
-    tools:context="com.loopeer.example.shadows.ShadowViewDemo2Activity">
+    tools:context="com.loopeer.example.shadows.ShadowViewDemo2Activity"
+    android:background="#F5F5F5">
 
-    <com.loopeer.shadow.ShadowView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:clickable="true"
-        android:elevation="10dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:padding="10dp"
-        app:backgroundColor="#f44336"
-        app:cornerRadiusTL="8dp"
-        app:cornerRadiusTR="8dp"
-        app:foregroundColor="#03a9f4"
-        app:shadowColor="#f44336"
-        app:shadowDy="2"
-        app:shadowMarginLeft="5dp"
-        app:shadowMarginRight="5dp"
-        app:shadowMarginTop="5dp"
-        app:shadowRadius="5dp">
+        android:orientation="vertical">
 
-        <TextView
+        <com.loopeer.shadow.ShadowView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:foreground="?attr/selectableItemBackground"
             android:padding="10dp"
-            android:text="#F44336"
-            android:textColor="@android:color/white"
-            android:textSize="40sp"
-            android:textStyle="bold"/>
-    </com.loopeer.shadow.ShadowView>
+            app:cornerRadiusTL="8dp"
+            app:cornerRadiusTR="8dp"
+            app:shadowDy="2"
+            app:shadowMarginLeft="5dp"
+            app:shadowMarginRight="5dp"
+            app:shadowMarginTop="5dp"
+            app:shadowRadius="5dp">
 
-    <com.loopeer.shadow.ShadowView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:clickable="true"
-        android:elevation="10dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:padding="10dp"
-        app:backgroundColor="#03a9f4"
-        app:foregroundColor="#4caf50"
-        app:shadowColor="#03a9f4"
-        app:shadowDy="2"
-        app:shadowMarginLeft="5dp"
-        app:shadowMarginRight="5dp"
-        app:shadowRadius="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This library draw android view shadow by ShadowLayer. You may don't like the CardView's black shadow which we can't change it's color."
+                android:textStyle="bold"/>
+        </com.loopeer.shadow.ShadowView>
 
-        <TextView
+        <include layout="@layout/view_divider"/>
+
+        <com.loopeer.shadow.ShadowView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:foreground="?attr/selectableItemBackground"
             android:padding="10dp"
-            android:text="#03A9F4"
-            android:textColor="@android:color/white"
-            android:textSize="40sp"
-            android:textStyle="bold"/>
-    </com.loopeer.shadow.ShadowView>
+            app:shadowDy="2"
+            app:shadowMarginLeft="5dp"
+            app:shadowMarginRight="5dp"
+            app:shadowRadius="5dp">
 
-    <com.loopeer.shadow.ShadowView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:clickable="true"
-        android:elevation="10dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:padding="10dp"
-        app:backgroundColor="#4caf50"
-        app:foregroundColor="#607d8b"
-        app:shadowColor="#4caf50"
-        app:shadowDy="2"
-        app:shadowMarginLeft="5dp"
-        app:shadowMarginRight="5dp"
-        app:shadowRadius="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Same to CardView wrap content and set shadow radius. You can change shadow color, foreground color and corner radius everywhere. "
+                android:textStyle="bold"/>
+        </com.loopeer.shadow.ShadowView>
 
-        <TextView
+        <include layout="@layout/view_divider"/>
+
+        <com.loopeer.shadow.ShadowView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:padding="10dp"
-            android:text="#4CAF50"
-            android:textColor="@android:color/white"
-            android:textSize="40sp"
-            android:textStyle="bold"/>
-    </com.loopeer.shadow.ShadowView>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cornerRadiusBL="8dp"
+            app:cornerRadiusBR="8dp"
+            app:shadowDy="2"
+            app:shadowMarginLeft="5dp"
+            app:shadowMarginRight="5dp"
+            app:shadowMarginBottom="5dp"
+            app:shadowRadius="5dp">
 
-    <com.loopeer.shadow.ShadowView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:clickable="true"
-        android:elevation="10dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:padding="10dp"
-        app:backgroundColor="#607d8b"
-        app:cornerRadiusBL="4dp"
-        app:cornerRadiusBR="4dp"
-        app:foregroundColor="#f44336"
-        app:shadowColor="#607d8b"
-        app:shadowDy="2"
-        app:shadowMarginBottom="5dp"
-        app:shadowMarginLeft="5dp"
-        app:shadowMarginRight="5dp"
-        app:shadowRadius="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Because the shadow is draw in the view. So you must add space to draw the shadow. The ShadowView add one param shadowMargin which must be set before you add shadow radius to the view."
+                android:textStyle="bold"/>
+        </com.loopeer.shadow.ShadowView>
 
-        <TextView
+        <com.loopeer.shadow.ShadowView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:padding="10dp"
-            android:text="#607D8B"
-            android:textColor="@android:color/white"
-            android:textSize="40sp"
-            android:textStyle="bold"/>
-    </com.loopeer.shadow.ShadowView>
-</LinearLayout>
+            app:cornerRadius="8dp"
+            app:shadowDy="2"
+            app:shadowMargin="5dp"
+            app:shadowRadius="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Same to CardView wrap content and set shadow radius. You can change shadow color, foreground color and corner radius everywhere. "
+                android:textStyle="bold"/>
+        </com.loopeer.shadow.ShadowView>
+
+        <com.loopeer.shadow.ShadowView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="10dp"
+            app:backgroundColor="#f44336"
+            app:cornerRadiusTL="8dp"
+            app:cornerRadiusTR="8dp"
+            app:foregroundColor="#75ffffff"
+            app:shadowColor="#f44336"
+            app:shadowDy="2"
+            app:shadowMarginLeft="5dp"
+            app:shadowMarginRight="5dp"
+            app:shadowMarginTop="5dp"
+            app:shadowRadius="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:text="#F44336"
+                android:textColor="@android:color/white"
+                android:textSize="40sp"
+                android:textStyle="bold"/>
+        </com.loopeer.shadow.ShadowView>
+
+        <com.loopeer.shadow.ShadowView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="10dp"
+            app:backgroundColor="#03a9f4"
+            app:foregroundColor="#75ffffff"
+            app:shadowColor="#03a9f4"
+            app:shadowDy="2"
+            app:shadowMarginLeft="5dp"
+            app:shadowMarginRight="5dp"
+            app:shadowRadius="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:text="#03A9F4"
+                android:textColor="@android:color/white"
+                android:textSize="40sp"
+                android:textStyle="bold"/>
+        </com.loopeer.shadow.ShadowView>
+
+        <com.loopeer.shadow.ShadowView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="10dp"
+            app:backgroundColor="#4caf50"
+            app:foregroundColor="#75ffffff"
+            app:shadowColor="#4caf50"
+            app:shadowDy="2"
+            app:shadowMarginLeft="5dp"
+            app:shadowMarginRight="5dp"
+            app:shadowRadius="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:text="#4CAF50"
+                android:textColor="@android:color/white"
+                android:textSize="40sp"
+                android:textStyle="bold"/>
+        </com.loopeer.shadow.ShadowView>
+
+        <com.loopeer.shadow.ShadowView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="10dp"
+            app:backgroundColor="#607d8b"
+            app:cornerRadiusBL="4dp"
+            app:cornerRadiusBR="4dp"
+            app:foregroundColor="@color/shadow_view_foreground_color_light"
+            app:shadowColor="#607d8b"
+            app:shadowDy="2"
+            app:shadowMarginBottom="5dp"
+            app:shadowMarginLeft="5dp"
+            app:shadowMarginRight="5dp"
+            app:shadowRadius="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:text="#607D8B"
+                android:textColor="@android:color/white"
+                android:textSize="40sp"
+                android:textStyle="bold"/>
+        </com.loopeer.shadow.ShadowView>
+    </LinearLayout>
+
+</ScrollView>
