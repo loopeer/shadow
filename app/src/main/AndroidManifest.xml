@@ -17,8 +17,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".CardViewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
         </activity>
-        <activity android:name=".ShadowViewActivity">
+        <activity android:name=".ShadowViewActivity"
+            android:label="ShadowView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
         </activity>
     </application>
 

@@ -17,7 +17,8 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
     : ViewGroup(context, attributeSet, defStyleInt) {
     private val DEFAULT_CHILD_GRAVITY = Gravity.TOP or Gravity.START
 
-    private var SIZE_UNSET = 0
+    private var SIZE_UNSET = -1
+    private var SIZE_DEFAULT = 0
     private var foregroundDraw: Drawable? = null
     private val selfBounds = Rect()
     private val overlayBounds = Rect()
@@ -32,107 +33,86 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
             field = value
             updateForegroundColor()
         }
-    var offset = 7
 
-    var shadowRadius = 7f
+    var shadowRadius = 0f
         set(value) {
+            var v = value
+            if (v > getShadowMarginMax() && getShadowMarginMax() != 0f) {
+                v = getShadowMarginMax()
+            }
             field = value
-            bgPaint.setShadowLayer(value, 0f, 0f,
+            bgPaint.setShadowLayer(v, 0f, 0f,
                     shadowColor)
-            offset = value.toInt()
             invalidate()
         }
-    var cornerRadius = 20f
+        get() {
+            return if (field > getShadowMarginMax() && getShadowMarginMax() != 0f) {
+                getShadowMarginMax()
+            } else {
+                field
+            }
+        }
     var cornerRadiusTL: Float
-        get() {
-            return if (cornerRadius > 0) {
-                cornerRadius
-            } else {
-                field
-            }
-        }
     var cornerRadiusTR: Float
-        get() {
-            return if (cornerRadius > 0) {
-                cornerRadius
-            } else {
-                field
-            }
-        }
     var cornerRadiusBL: Float
-        get() {
-            return if (cornerRadius > 0) {
-                cornerRadius
-            } else {
-                field
-            }
-        }
     var cornerRadiusBR: Float
-        get() {
-            return if (cornerRadius > 0) {
-                cornerRadius
-            } else {
-                field
-            }
+    var shadowMarginTop: Int = 0
+        set(value) {
+            field = value
+            updatePaintShadow()
         }
-
-    var shadowMargin: Int
-    var shadowMarginTop: Int
-        get() {
-            return if (shadowMargin > 0) {
-                shadowMargin
-            } else {
-                field
-            }
+    var shadowMarginLeft: Int= 0
+        set(value) {
+            field = value
+            updatePaintShadow()
         }
-    var shadowMarginLeft: Int = 0
-        get() {
-            return if (shadowMargin > 0) {
-                shadowMargin
-            } else {
-                field
-            }
+    var shadowMarginRight: Int= 0
+        set(value) {
+            field = value
+            updatePaintShadow()
         }
-    var shadowMarginRight: Int = 0
-        get() {
-            return if (shadowMargin > 0) {
-                shadowMargin
-            } else {
-                field
-            }
-        }
-    var shadowMarginBottom: Int = 0
-        get() {
-            return if (shadowMargin > 0) {
-                shadowMargin
-            } else {
-                field
-            }
+    var shadowMarginBottom: Int= 0
+        set(value) {
+            field = value
+            updatePaintShadow()
         }
 
     init {
         val a = getContext().obtainStyledAttributes(attributeSet, R.styleable.ShadowView,
                 defStyleInt, 0)
+        shadowColor = a.getColor(R.styleable.ShadowView_shadowColor, Color.parseColor("#E3E5E7"))
+        foregroundColor = a.getColor(R.styleable.ShadowView_foregroundColor, Color.parseColor("#1f000000"))//dark #33ffffff light 1f000000
         val d = a.getDrawable(R.styleable.ShadowView_android_foreground)
         if (d != null) {
             setForeground(d)
         }
-        shadowMargin = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMargin, SIZE_UNSET)
-        shadowMarginTop = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginTop, shadowMargin)
-        shadowMarginLeft = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginLeft, shadowMargin)
-        shadowMarginRight = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginRight, shadowMargin)
-        shadowMarginBottom = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginBottom, shadowMargin)
-        cornerRadius = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadius, SIZE_UNSET).toFloat()
-        val cornerValues = cornerRadius.toInt()
-        cornerRadiusTL = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusTL, cornerValues).toFloat()
-        cornerRadiusTR = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusTR, cornerValues).toFloat()
-        cornerRadiusBL = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusBL, cornerValues).toFloat()
-        cornerRadiusBR = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusBR, cornerValues).toFloat()
+        val shadowMargin = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMargin, SIZE_UNSET)
+        if (shadowMargin >= 0) {
+            shadowMarginTop = shadowMargin
+            shadowMarginLeft = shadowMargin
+            shadowMarginRight = shadowMargin
+            shadowMarginBottom = shadowMargin
+        } else {
+            shadowMarginTop = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginTop, SIZE_DEFAULT)
+            shadowMarginLeft = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginLeft, SIZE_DEFAULT)
+            shadowMarginRight = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginRight, SIZE_DEFAULT)
+            shadowMarginBottom = a.getDimensionPixelSize(R.styleable.ShadowView_shadowMarginBottom, SIZE_DEFAULT)
+        }
 
+        val cornerRadius = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadius, SIZE_UNSET).toFloat()
+        if (cornerRadius >= 0) {
+            cornerRadiusTL = cornerRadius
+            cornerRadiusTR = cornerRadius
+            cornerRadiusBL = cornerRadius
+            cornerRadiusBR = cornerRadius
+        } else {
+            cornerRadiusTL = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusTL, SIZE_DEFAULT).toFloat()
+            cornerRadiusTR = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusTR, SIZE_DEFAULT).toFloat()
+            cornerRadiusBL = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusBL, SIZE_DEFAULT).toFloat()
+            cornerRadiusBR = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusBR, SIZE_DEFAULT).toFloat()
+        }
         a.recycle()
-        foregroundColor = Color.parseColor("#1f000000")//dark #33ffffff light 1f000000
 
-        shadowColor = Color.parseColor("#FAC4BA")//FAC4BA E3E5E7
         bgPaint.color = Color.WHITE
         bgPaint.isAntiAlias = true
         bgPaint.style = Paint.Style.FILL
@@ -140,6 +120,12 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
                 shadowColor)
         setLayerType(LAYER_TYPE_SOFTWARE, null)
         setWillNotDraw(false)
+    }
+
+    private fun updatePaintShadow() {
+        bgPaint.setShadowLayer(shadowRadius, 0f, 0f,
+                shadowColor)
+        invalidate()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -245,7 +231,6 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
                     }
                     else -> childLeft = parentLeft + lp.leftMargin + shadowMarginLeft
                 }
-
                 when (verticalGravity) {
                     Gravity.TOP -> childTop = parentTop + lp.topMargin + shadowMarginTop
                     Gravity.CENTER_VERTICAL -> childTop = parentTop + (parentBottom - parentTop - height) / 2 +
@@ -253,7 +238,6 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
                     Gravity.BOTTOM -> childTop = parentBottom - height - lp.bottomMargin - shadowMarginBottom
                     else -> childTop = parentTop + lp.topMargin + shadowMarginTop
                 }
-
                 child.layout(childLeft, childTop, childLeft + width, childTop + height)
             }
         }
@@ -266,11 +250,11 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
             val w = measuredWidth
             val h = measuredHeight
             val path = ShapeUtils.roundedRect(shadowMarginLeft.toFloat(), shadowMarginTop.toFloat(), (w - shadowMarginRight).toFloat()
-                    , (h - shadowMarginBottom).toFloat(), getCornerRadiusValue(), getCornerRadiusValue()
-                    , cornerRadiusTL > 0
-                    , cornerRadiusTR > 0
-                    , cornerRadiusBR > 0
-                    , cornerRadiusBL > 0)
+                    , (h - shadowMarginBottom).toFloat()
+                    , cornerRadiusTL
+                    , cornerRadiusTR
+                    , cornerRadiusBR
+                    , cornerRadiusBL)
             it.drawPath(path, bgPaint)
         }
     }
@@ -283,18 +267,18 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
             val w = measuredWidth
             val h = measuredHeight
             val path = ShapeUtils.roundedRect(shadowMarginLeft.toFloat(), shadowMarginTop.toFloat(), (w - shadowMarginRight).toFloat()
-                    , (h - shadowMarginBottom).toFloat(), getCornerRadiusValue(), getCornerRadiusValue()
-                    , cornerRadiusTL > 0
-                    , cornerRadiusTR > 0
-                    , cornerRadiusBR > 0
-                    , cornerRadiusBL > 0)
+                    , (h - shadowMarginBottom).toFloat()
+                    , cornerRadiusTL
+                    , cornerRadiusTR
+                    , cornerRadiusBR
+                    , cornerRadiusBL)
             canvas.clipPath(path)
             drawForeground(canvas)
             canvas.restore()
         }
     }
 
-    fun getCornerRadiusValue() = floatArrayOf(cornerRadius, cornerRadiusTL, cornerRadiusTR, cornerRadiusBR, cornerRadiusBL).max()?:0f
+    private fun getShadowMarginMax() = intArrayOf(shadowMarginLeft, shadowMarginTop, shadowMarginRight, shadowMarginBottom).max()?.toFloat()?:0f
 
     fun drawForeground(canvas: Canvas?) {
         foregroundDraw?.let {
@@ -335,19 +319,14 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
             if (foregroundGravity and Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK == 0) {
                 foregroundGravity = foregroundGravity or Gravity.START
             }
-
             if (foregroundGravity and Gravity.VERTICAL_GRAVITY_MASK == 0) {
                 foregroundGravity = foregroundGravity or Gravity.TOP
             }
-
             foregroundDrawGravity = foregroundGravity
-
-
             if (foregroundDrawGravity == Gravity.FILL && foregroundDraw != null) {
                 val padding = Rect()
                 foregroundDraw?.getPadding(padding)
             }
-
             requestLayout()
         }
     }
@@ -402,6 +381,23 @@ class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: Attr
         super.drawableHotspotChanged(x, y)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             foregroundDraw?.let { it.setHotspot(x, y) }
+    }
+
+    fun setShadowMargin(left: Int, top: Int, right: Int, bottom: Int) {
+        shadowMarginLeft = left
+        shadowMarginTop = top
+        shadowMarginRight = right
+        shadowMarginBottom = bottom
+        requestLayout()
+        invalidate()
+    }
+
+    fun setCornerRadius(tl: Float, tr: Float, br: Float, bl: Float) {
+        cornerRadiusTL = tl
+        cornerRadiusTR = tr
+        cornerRadiusBR = br
+        cornerRadiusBL = bl
+        invalidate()
     }
 
     override fun generateLayoutParams(attrs: AttributeSet): LayoutParams {

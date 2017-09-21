@@ -13,6 +13,8 @@
         <attr name="cornerRadiusTR" format="dimension"/>
         <attr name="cornerRadiusBL" format="dimension"/>
         <attr name="cornerRadiusBR" format="dimension"/>
+        <attr name="foregroundColor" format="color"/>
+        <attr name="shadowColor" format="color"/>
     </declare-styleable>
     <declare-styleable name="ShadowView_Layout">
         <attr name="layout_gravity" />

@@ -1,146 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:background="#F5F5F5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.loopeer.example.shadows.ShadowViewActivity"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="81dp">
+    tools:context="com.loopeer.example.shadows.ShadowViewActivity">
+
+    <FrameLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="100dp"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/view_recycler"
+            android:layout_width="match_parent"
+            android:paddingBottom="16dp"
+            android:clipToPadding="false"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
 
     <com.loopeer.shadow.ShadowView
         android:id="@+id/shadow_view"
+        android:elevation="10dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:foreground="?attr/selectableItemBackground"
-        android:onClick="onShadowClickTest"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space"
-        app:shadowMarginTop="16dp"
-        app:shadowMarginRight="16dp"
-        app:shadowMarginLeft="16dp"
-        app:cornerRadiusTL="8dp"
-        app:cornerRadiusTR="8dp">
+        android:onClick="onShadowClickTest">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Google Developer Days Europe 2017 took place in Krakow, Poland. In this playlist, you can find all the recorded sessions from the event, across all tracks (Develop on Mobile, Mobile Web, Beyond Mobile, and Android)."/>
     </com.loopeer.shadow.ShadowView>
+</android.support.design.widget.CoordinatorLayout>
 
-    <SeekBar
-        android:id="@+id/seek_padding"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:max="100"
-        android:progress="8"
-        app:layout_constraintBottom_toBottomOf="@+id/text_padding_show"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_padding_show"
-        app:layout_constraintTop_toTopOf="@+id/text_padding_show"/>
-
-    <TextView
-        android:id="@+id/text_padding"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Padding"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/text_margin"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Margin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_padding"/>
-
-    <SeekBar
-        android:id="@+id/seek_margin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:max="100"
-        android:progress="8"
-        app:layout_constraintBottom_toBottomOf="@+id/text_margin_show"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_margin_show"
-        app:layout_constraintTop_toTopOf="@+id/text_margin_show"/>
-
-    <Space
-        android:id="@+id/space"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_radius_show"/>
-
-    <TextView
-        android:id="@+id/text_shadow_radius"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Radius"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_margin"/>
-
-    <SeekBar
-        android:id="@+id/seek_shadow_radius"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:max="100"
-        android:progress="4"
-        app:layout_constraintBottom_toBottomOf="@+id/text_shadow_radius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_radius_show"
-        app:layout_constraintTop_toTopOf="@+id/text_shadow_radius"/>
-
-    <TextView
-        android:id="@+id/text_padding_show"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:text="8"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/text_margin"
-        app:layout_constraintStart_toEndOf="@+id/text_padding"
-        app:layout_constraintTop_toTopOf="@+id/text_padding"/>
-
-    <TextView
-        android:id="@+id/text_margin_show"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="8"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/text_margin"
-        app:layout_constraintStart_toEndOf="@+id/text_margin"
-        app:layout_constraintTop_toTopOf="@+id/text_margin"/>
-
-    <TextView
-        android:id="@+id/text_radius_show"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="4"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/text_shadow_radius"
-        app:layout_constraintStart_toEndOf="@+id/text_shadow_radius"
-        app:layout_constraintTop_toTopOf="@+id/text_shadow_radius"/>
-
-</android.support.constraint.ConstraintLayout>
