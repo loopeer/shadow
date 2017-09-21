@@ -21,8 +21,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
-        <activity android:name=".ShadowViewActivity"
+        <activity
+            android:name=".ShadowViewActivity"
             android:label="ShadowView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".ShadowViewDemo2Activity"
+            android:label="ShadowViewDemo2">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>

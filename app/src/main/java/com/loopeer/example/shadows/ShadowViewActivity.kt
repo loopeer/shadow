@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.list_item_seek_select.view.*
 
 class ShadowViewActivity : AppCompatActivity() {
 
-    lateinit var adapter: ShadowViewRecyclerAdapter
+    private lateinit var adapter: ShadowViewRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

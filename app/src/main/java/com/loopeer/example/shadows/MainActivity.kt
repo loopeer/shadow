@@ -19,4 +19,8 @@ class MainActivity : AppCompatActivity() {
     fun onShadowItemClick(view: View) {
         startActivity(Intent(this, ShadowViewActivity::class.java))
     }
+
+    fun onShadowDemo2ItemClick(view: View) {
+        startActivity(Intent(this, ShadowViewDemo2Activity::class.java))
+    }
 }
