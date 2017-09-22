@@ -27,6 +27,7 @@ dependencies {
     implementation libs.constraintLayout
     implementation libs.design
     implementation libs.flexbox
+//    implementation 'com.loopeer.lib:shadow:0.0.2'
     implementation project(':shadow')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'

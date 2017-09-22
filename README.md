@@ -21,7 +21,7 @@ Installation
 ====
 ```groovy
 dependencies {
-    compile 'com.loopeer.lib:shadow:0.0.1'
+    compile 'com.loopeer.lib:shadow:0.0.3'
 }
 ```
 Usages
