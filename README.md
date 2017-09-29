@@ -71,7 +71,7 @@ backgroundColor
 
 Donate
 ====
-<img src="/screenshot/donate.jpeg" width="400">
+<img src="/screenshot/donate.jpeg" width="300">
 
 License
 ====
