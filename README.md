@@ -69,6 +69,10 @@ shadowRadius
 backgroundColor
 ```
 
+Donate
+====
+<img src="/screenshot/donate.jpeg" width="200">
+
 License
 ====
 <pre>
