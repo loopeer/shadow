@@ -4,7 +4,7 @@ This library draw android view shadow by ShadowLayer. You may don't like the Car
 
 **Caveat:** `Margin In UI~` = `layout_margin` + `shadow_margin(Add by ShadowView)`
   
-[Download Smaple](https://github.com/loopeer/shadow/releases/download/v0.0.1/app-debug.apk)
+[Download Sample](https://github.com/loopeer/shadow/releases/download/v0.0.1/app-debug.apk)
 
 Screenshot
 ====
