@@ -14,7 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 
 
-class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: AttributeSet? = null, defStyleInt: Int = 0)
+open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: AttributeSet? = null, defStyleInt: Int = 0)
     : ViewGroup(context, attributeSet, defStyleInt) {
     private val DEFAULT_CHILD_GRAVITY = Gravity.TOP or Gravity.START
 
