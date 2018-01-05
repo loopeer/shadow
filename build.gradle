@@ -10,7 +10,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
@@ -33,16 +33,16 @@ task clean(type: Delete) {
 
 ext {
     configs = [
-            compileSdkVersion: 26,
-            buildToolsVersion: '26.0.1',
+            compileSdkVersion: 27,
+            buildToolsVersion: '27.0.2',
             minSdkVersion    : 17,
-            targetSdkVersion : 26,
+            targetSdkVersion : 27,
             versionCode      : 1,
             versionName      : '1.0.0',
     ]
 
-    supportLibraryVersion = '26.1.0'
-    constraintVersion = '1.1.0-beta1'
+    supportLibraryVersion = '27.0.2'
+    constraintVersion = '1.1.0-beta4'
     flexboxVersion = '0.3.0'
 
     libs = [appcompatV7     : "com.android.support:appcompat-v7:$supportLibraryVersion",

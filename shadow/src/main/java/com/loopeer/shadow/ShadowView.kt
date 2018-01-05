@@ -105,7 +105,7 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
                 , ContextCompat.getColor(context, R.color.shadow_view_foreground_color_dark))
         backgroundClr = a.getColor(R.styleable.ShadowView_backgroundColor, Color.WHITE)
         shadowDx = a.getFloat(R.styleable.ShadowView_shadowDx, 0f)
-        shadowDy = a.getFloat(R.styleable.ShadowView_shadowDy, 0f)
+        shadowDy = a.getFloat(R.styleable.ShadowView_shadowDy, 1f)
         shadowRadius = a.getDimensionPixelSize(R.styleable.ShadowView_shadowRadius, SIZE_DEFAULT).toFloat()
         val d = a.getDrawable(R.styleable.ShadowView_android_foreground)
         if (d != null) {
@@ -141,8 +141,6 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
         bgPaint.color = backgroundClr
         bgPaint.isAntiAlias = true
         bgPaint.style = Paint.Style.FILL
-        bgPaint.setShadowLayer(shadowRadius, 0f, 1f,
-                shadowColor)
         setLayerType(LAYER_TYPE_SOFTWARE, null)
         setWillNotDraw(false)
         background = null
