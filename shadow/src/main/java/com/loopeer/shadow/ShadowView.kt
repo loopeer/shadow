@@ -100,9 +100,9 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
         val a = getContext().obtainStyledAttributes(attributeSet, R.styleable.ShadowView,
                 defStyleInt, 0)
         shadowColor = a.getColor(R.styleable.ShadowView_shadowColor
-                , ContextCompat.getColor(context, R.color.shadow_view_default_shadow_color))
+                , ContextCompat.getColor(context!!, R.color.shadow_view_default_shadow_color))
         foregroundColor = a.getColor(R.styleable.ShadowView_foregroundColor
-                , ContextCompat.getColor(context, R.color.shadow_view_foreground_color_dark))
+                , ContextCompat.getColor(context!!, R.color.shadow_view_foreground_color_dark))
         backgroundClr = a.getColor(R.styleable.ShadowView_backgroundColor, Color.WHITE)
         shadowDx = a.getFloat(R.styleable.ShadowView_shadowDx, 0f)
         shadowDy = a.getFloat(R.styleable.ShadowView_shadowDy, 1f)
