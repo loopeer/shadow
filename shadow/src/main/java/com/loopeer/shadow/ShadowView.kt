@@ -291,6 +291,8 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
                     , cornerRadiusBR
                     , cornerRadiusBL)
             it.drawPath(path, bgPaint)
+            canvas.clipPath(path)
+            canvas.drawColor(backgroundClr) // draw backgroundColor
         }
     }
 
@@ -308,7 +310,6 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
                     , cornerRadiusBR
                     , cornerRadiusBL)
             canvas.clipPath(path)
-            canvas.drawColor(backgroundClr) // draw backgroundColor
             drawForeground(canvas)
             canvas.restore()
         }
