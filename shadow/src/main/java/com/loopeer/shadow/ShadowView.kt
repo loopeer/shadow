@@ -5,13 +5,13 @@ import android.content.res.ColorStateList
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
-import android.util.AttributeSet
-import android.widget.FrameLayout
 import android.os.Build
 import android.support.v4.content.ContextCompat
+import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 
 
 open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: AttributeSet? = null, defStyleInt: Int = 0)
@@ -41,7 +41,13 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
     var backgroundClr: Int = 0
         set(value) {
             field = value
-            bgPaint.color = value
+            invalidate()
+        }
+
+    var shadowAlpha: Int = 255
+        set(value) {
+            field = value
+            bgPaint.alpha = value
             invalidate()
         }
 
@@ -107,6 +113,7 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
         shadowDx = a.getFloat(R.styleable.ShadowView_shadowDx, 0f)
         shadowDy = a.getFloat(R.styleable.ShadowView_shadowDy, 1f)
         shadowRadius = a.getDimensionPixelSize(R.styleable.ShadowView_shadowRadius, SIZE_DEFAULT).toFloat()
+        shadowAlpha = a.getInteger(R.styleable.ShadowView_shadowAlpha, 255)
         val d = a.getDrawable(R.styleable.ShadowView_android_foreground)
         if (d != null) {
             setForeground(d)
@@ -138,8 +145,8 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
         }
         a.recycle()
 
-        bgPaint.color = backgroundClr
         bgPaint.isAntiAlias = true
+        bgPaint.alpha = shadowAlpha
         bgPaint.style = Paint.Style.FILL
         setLayerType(LAYER_TYPE_SOFTWARE, null)
         setWillNotDraw(false)
@@ -301,6 +308,7 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
                     , cornerRadiusBR
                     , cornerRadiusBL)
             canvas.clipPath(path)
+            canvas.drawColor(backgroundClr) // draw backgroundColor
             drawForeground(canvas)
             canvas.restore()
         }

@@ -6,6 +6,7 @@ enum class SeekItem {
     PADDING("Padding"),
     SHADOW_RADIUS("Shadow Radius"),
     SHADOW_MARGIN("Shadow Margin"),
+    SHADOW_ALPHA("Shadow Alpha"),
     CORNER_RADIUS("Corner Radius"),
     FOREGROUND_COLOR("Foreground Color"),
     SHADOW_COLOR("Shadow Color"),

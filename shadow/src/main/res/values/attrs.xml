@@ -15,6 +15,7 @@
         <attr name="cornerRadiusBR" format="dimension"/>
         <attr name="foregroundColor" format="color"/>
         <attr name="shadowColor" format="color"/>
+        <attr name="shadowAlpha" format="integer"/>
         <attr name="shadowDx" format="float"/>
         <attr name="shadowDy" format="float"/>
         <attr name="shadowRadius" format="dimension"/>
