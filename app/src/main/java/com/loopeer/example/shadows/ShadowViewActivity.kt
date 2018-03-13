@@ -2,16 +2,16 @@ package com.loopeer.example.shadows
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
-import android.view.ViewGroup
-import kotlinx.android.synthetic.main.activity_shadow_view.*
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.google.android.flexbox.FlexboxLayout
 import com.loopeer.shadow.ShadowView
+import kotlinx.android.synthetic.main.activity_shadow_view.*
 import kotlinx.android.synthetic.main.list_item_color_select.view.*
 import kotlinx.android.synthetic.main.list_item_seek_select.view.*
 
@@ -48,7 +48,7 @@ class ShadowViewActivity : AppCompatActivity() {
                 holder.bind(SeekItem.values()[position], shadowView)
             } else if (holder is ShadowViewColorItemHolder) {
                 holder.bind(SeekItem.values()[position], shadowView)
-                holder.onClickColor = {notifyItemChanged(position)}
+                holder.onClickColor = { notifyItemChanged(position) }
             }
         }
 
@@ -92,6 +92,12 @@ class ShadowViewActivity : AppCompatActivity() {
                     itemView.seek_bar.onProgressChange({ _, p, _ ->
                         shadowView.setShadowMargin(p, p, p, p)
                         itemView.text_value.text = p.toString()
+                    })
+                }
+                SeekItem.SHADOW_ALPHA -> {
+                    itemView.seek_bar.onProgressChange({ _, p, _ ->
+                        shadowView.shadowAlpha = p * 255 / 100
+                        itemView.text_value.text = shadowView.shadowAlpha.toString()
                     })
                 }
                 SeekItem.SHADOW_MARGIN_LEFT -> {
@@ -184,6 +190,7 @@ class ShadowViewActivity : AppCompatActivity() {
             }
         }
     }
+
     class ShadowViewColorItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var onClickColor: (() -> Unit)? = null
 

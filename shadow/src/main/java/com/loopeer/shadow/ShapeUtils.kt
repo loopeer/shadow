@@ -72,12 +72,18 @@ object ShapeUtils {
         if (bl < 0) bl = 0f
         val width = right - left
         val height = bottom - top
-        if (tl > Math.min(width, height) / 2) tl = Math.min(width, height) / 2
-        if (tr > Math.min(width, height) / 2) tr = Math.min(width, height) / 2
-        if (br > Math.min(width, height) / 2) br = Math.min(width, height) / 2
-        if (bl > Math.min(width, height) / 2) bl = Math.min(width, height) / 2
+        val min = Math.min(width, height)
+        if (tl > min / 2) tl = min / 2
+        if (tr > min / 2) tr = min / 2
+        if (br > min / 2) br = min / 2
+        if (bl > min / 2) bl = min / 2
 //        val widthMinusCorners = width - 2 * rx
 //        val heightMinusCorners = height - 2 * ry
+        if (tl == tr && tr == br && br == bl && tl == min / 2) {
+            val radius = min / 2F
+            path.addCircle(left + radius, top + radius, radius, Path.Direction.CW)
+            return path
+        }
 
         path.moveTo(right, top + tr)
         if (tr > 0)
