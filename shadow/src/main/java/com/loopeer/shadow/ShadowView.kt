@@ -44,13 +44,6 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
             invalidate()
         }
 
-    var shadowAlpha: Int = 255
-        set(value) {
-            field = value
-            bgPaint.alpha = value
-            invalidate()
-        }
-
     var shadowRadius = 0f
         set(value) {
             var v = value
@@ -113,7 +106,6 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
         shadowDx = a.getFloat(R.styleable.ShadowView_shadowDx, 0f)
         shadowDy = a.getFloat(R.styleable.ShadowView_shadowDy, 1f)
         shadowRadius = a.getDimensionPixelSize(R.styleable.ShadowView_shadowRadius, SIZE_DEFAULT).toFloat()
-        shadowAlpha = a.getInteger(R.styleable.ShadowView_shadowAlpha, 255)
         val d = a.getDrawable(R.styleable.ShadowView_android_foreground)
         if (d != null) {
             setForeground(d)
@@ -144,9 +136,8 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
             cornerRadiusBR = a.getDimensionPixelSize(R.styleable.ShadowView_cornerRadiusBR, SIZE_DEFAULT).toFloat()
         }
         a.recycle()
-
+        bgPaint.color = backgroundClr
         bgPaint.isAntiAlias = true
-        bgPaint.alpha = shadowAlpha
         bgPaint.style = Paint.Style.FILL
         setLayerType(LAYER_TYPE_SOFTWARE, null)
         setWillNotDraw(false)
@@ -292,7 +283,6 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
                     , cornerRadiusBL)
             it.drawPath(path, bgPaint)
             canvas.clipPath(path)
-            canvas.drawColor(backgroundClr) // draw backgroundColor
         }
     }
 

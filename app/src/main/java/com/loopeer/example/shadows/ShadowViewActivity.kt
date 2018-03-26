@@ -94,12 +94,6 @@ class ShadowViewActivity : AppCompatActivity() {
                         itemView.text_value.text = p.toString()
                     })
                 }
-                SeekItem.SHADOW_ALPHA -> {
-                    itemView.seek_bar.onProgressChange({ _, p, _ ->
-                        shadowView.shadowAlpha = p * 255 / 100
-                        itemView.text_value.text = shadowView.shadowAlpha.toString()
-                    })
-                }
                 SeekItem.SHADOW_MARGIN_LEFT -> {
                     itemView.text_value.text = shadowView.shadowMarginLeft.toString()
                     itemView.seek_bar.onProgressChange({ _, p, _ ->
