@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import android.os.Build
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
@@ -16,10 +17,12 @@ import android.widget.FrameLayout
 
 open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet: AttributeSet? = null, defStyleInt: Int = 0)
     : ViewGroup(context, attributeSet, defStyleInt) {
-    private val DEFAULT_CHILD_GRAVITY = Gravity.TOP or Gravity.START
+    companion object {
+        private const val DEFAULT_CHILD_GRAVITY = Gravity.TOP or Gravity.START
+        private const val SIZE_UNSET = -1
+        private const val SIZE_DEFAULT = 0
+    }
 
-    private var SIZE_UNSET = -1
-    private var SIZE_DEFAULT = 0
     private var foregroundDraw: Drawable? = null
     private val selfBounds = Rect()
     private val overlayBounds = Rect()
@@ -141,7 +144,7 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
         bgPaint.style = Paint.Style.FILL
         setLayerType(LAYER_TYPE_SOFTWARE, null)
         setWillNotDraw(false)
-        background = null
+        ViewCompat.setBackground(this, null)
     }
 
     private fun updatePaintShadow() {
@@ -173,7 +176,7 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
             heightSpec = MeasureSpec.makeMeasureSpec(childHeightSize, MeasureSpec.EXACTLY)
         }
         val child = getChildAt(0)
-        if (child.visibility !== View.GONE) {
+        if (child.visibility != View.GONE) {
             measureChildWithMargins(child, widthSpec, 0, heightSpec, 0)
             val lp = child.layoutParams as LayoutParams
             maxWidth =
@@ -240,7 +243,7 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
                     gravity = DEFAULT_CHILD_GRAVITY
                 }
 
-                val layoutDirection = layoutDirection
+                val layoutDirection = ViewCompat.getLayoutDirection(this)
                 val absoluteGravity = Gravity.getAbsoluteGravity(gravity, layoutDirection)
                 val verticalGravity = gravity and Gravity.VERTICAL_GRAVITY_MASK
 
