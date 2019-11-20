@@ -41,7 +41,7 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
     var backgroundClr: Int = 0
         set(value) {
             field = value
-            updateBackgroundClr()
+            updateBackgroundClr(value)
         }
 
     var shadowRadius = 0f
