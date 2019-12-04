@@ -41,7 +41,7 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
     var backgroundClr: Int = 0
         set(value) {
             field = value
-            invalidate()
+            updateBackgroundClr(value)
         }
 
     var shadowRadius = 0f
@@ -213,6 +213,12 @@ open class ShadowView @JvmOverloads constructor(context: Context?, attributeSet:
         layoutChildren(left, top, right, bottom, false)
         if (changed)
             foregroundDrawBoundsChanged = changed
+    }
+
+    private fun updateBackgroundClr(bgColor:Int){
+        //起作用
+        bgPaint.color=bgColor
+        invalidate()
     }
 
     private fun layoutChildren(left: Int, top: Int, right: Int, bottom: Int, forceLeftGravity: Boolean) {
